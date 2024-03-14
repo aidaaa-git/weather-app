@@ -1,0 +1,66 @@
+<div class="mainDisplay">
+  <div class="wallpaper">
+    <div class="weatherDisplay">
+      <div class="citySelector">
+        <select name="cities" class="form-select form-select-sm mb-3">
+          <option *ngFor="let city of cities" value="{{ city.id }}">{{ city.name }}</option>
+        </select>
+      </div>
+    <div class ="wallpaper" *ngIf = "weatherData"></div>
+      
+      <div class="upperData">
+        <img src="assets/sunny-city.jpg" *ngIf="weatherData.currentTemp > 15" class="mainImage">
+        <img src="assets/cold-weather.jpg" *ngIf="weatherData.currentTemp <= 15" class="mainImage">
+           <div class="currentData">
+              <div class="temperature">{{ weatherData.currentTemp | number: '1.0-0'}} °C</div>
+              <div class="location">Bugojno</div>
+           </div>
+      </div>
+      <div class="tempList">
+        <div class="container">
+          <div class="row weatherRow">
+            <div class="col weatherColumn my-auto">
+              <h5>Hour</h5><img src="assets/24-hours.png" class="headerImage">
+            </div>
+            <div class="col weatherColumn my-auto">
+              <h5>Temperature</h5><img src="assets/temperature.png" class="headerImage">
+            </div>
+            <div class="col weatherColumn my-auto">
+              <h5>Wind</h5><img src="assets/wind.png" class="headerImage">
+            </div>
+            <div class="col weatherColumn my-auto">
+              <h5>Humidity</h5><img src="assets/humidity.png" class="headerImage">
+            </div>
+            <div class="col my-auto">
+            </div>
+          </div>
+        </div>
+        <div class="weatherList">
+          <div class="container" *ngFor="let weather of weatherData.weatherByHour">
+            <div class="row weatherRow">
+              <div class="col weatherColumn my-auto">
+                {{ weather.hour }}
+              </div>
+              <div class="col weatherColumn my-auto">
+                {{ weather.temp }} °C
+              </div>
+              <div class="col weatherColumn my-auto">
+                {{ weather.wind }} km/h
+              </div>
+              <div class="col weatherColumn my-auto">
+                {{ weather.humidity }} %
+              </div>
+              <div class="col my-auto">
+                <img *ngIf="weather.type === 'sunny'" src="assets/sun.png" class="weatherImage">
+                <img *ngIf="weather.type === 'raining'" src="assets/raining.png" class="weatherImage">
+                <img *ngIf="weather.type === 'cloudy'" src="assets/cloudy.png" class="weatherImage">
+                <img *ngIf="weather.type === 'clouds'" src="assets/clouds.png" class="weatherImage">
+              </div>
+            </div>
+        </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
